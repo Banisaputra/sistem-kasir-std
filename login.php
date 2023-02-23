@@ -8,7 +8,6 @@ if (!isset($_SESSION['login'])) {
     header('location:index.php');
 }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -50,9 +49,6 @@ if (!isset($_SESSION['login'])) {
                                                 </button>
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer light text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                                     </div>
                                 </div>
                             </div>
