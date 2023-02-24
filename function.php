@@ -428,3 +428,9 @@ if (isset($_POST['hapuspemesan'])) {
     }
 
 }
+
+// fungsi cetak
+if(isset($_POST['cetakpesanan'])){
+    $idp = $_POST['idp'];
+    header('location:cetak.php?idp='.$idp);
+}

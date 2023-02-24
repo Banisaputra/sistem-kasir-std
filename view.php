@@ -78,6 +78,9 @@ if (isset($_GET['idp'])) {
                         <button type="button" class="btn btn-info mb-4" data-bs-toggle="modal" data-bs-target="#myModal">
                             Tambah Barang
                         </button>
+                        <button type="button" class="btn btn-primary mb-4 ms-5" data-bs-toggle="modal" data-bs-target="#cetak<?=$idp;?>">
+                            Cetak Nota
+                        </button>
 
                         <div class="card mb-4">
                             <div class="card-header">
@@ -155,38 +158,38 @@ while ($p = mysqli_fetch_array($get)) {
                                             </div>
                                         </div>
                                     </div>
-<!-- modal delete -->
-<div class="modal fade" id="delete<?=$idpr;?>">
-  <div class="modal-dialog">
-    <div class="modal-content">
+                                    <!-- modal delete -->
+                                    <div class="modal fade" id="delete<?=$idpr;?>">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Yakin Menghapus?</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+                                        <!-- Modal Header -->
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Yakin Menghapus?</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
 
-      <form method="POST">
+                                        <form method="POST">
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            Apakah Anda Yakin Ingin Menghapus Barang ini
-            <input type="hidden" name="iddp" value="<?=$iddp;?>">
-            <input type="hidden" name="idpr" value="<?=$idpr;?>">
-            <input type="hidden" name="idp" value="<?=$idp;?>">
+                                            <!-- Modal body -->
+                                            <div class="modal-body">
+                                                Apakah Anda Yakin Ingin Menghapus Barang ini
+                                                <input type="hidden" name="iddp" value="<?=$iddp;?>">
+                                                <input type="hidden" name="idpr" value="<?=$idpr;?>">
+                                                <input type="hidden" name="idp" value="<?=$idp;?>">
 
-        </div>
+                                            </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success" name="hapuspesanan">Hapus</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-        </form>
+                                                <!-- Modal footer -->
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success" name="hapuspesanan">Hapus</button>
+                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </form>
 
-    </div>
-  </div>
-</div>
+                                        </div>
+                                    </div>
+                                    </div>
 
                                         <?php
 }
@@ -222,24 +225,24 @@ while ($p = mysqli_fetch_array($get)) {
     </body>
 
 
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Tambah Barang</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Tambah Barang</h4>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
 
-      <form method="POST">
+                            <form method="POST">
 
-          <!-- Modal body -->
-          <div class="modal-body">
-            Pilih Barang
-            <select name="idproduk" class="form-control">
-            <?php
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Pilih Barang
+                                    <select name="idproduk" class="form-control">
+                                    <?php
 $getproduk = mysqli_query($conn, "select * from produk where idproduk not in (select idproduk from detailpesanan where idpesanan='$idp')");
 
 while ($p = mysqli_fetch_array($getproduk)) {
@@ -249,28 +252,105 @@ while ($p = mysqli_fetch_array($getproduk)) {
     $idproduk = $p['idproduk'];
 
     ?>
-            <option value="<?=$idproduk;?>"><?=$namaproduk;?> - <?=$deskripsi;?> (Stock : <?=$stock;?> )</option>
+                                    <option value="<?=$idproduk;?>"><?=$namaproduk;?> - <?=$deskripsi;?> (Stock : <?=$stock;?> )</option>
 
-            <?php
+                                    <?php
 }
 ;
 ?>
-            </select>
+                                    </select>
 
-            <input type="number" name="qty" class="form-control mt-4" placeholder="Jumlah" min="1" required>
-            <input type="hidden" name="idp" value="<?=$idp;?>">
-            </div>
+                                    <input type="number" name="qty" class="form-control mt-4" placeholder="Jumlah" min="1" required>
+                                    <input type="hidden" name="idp" value="<?=$idp;?>">
+                                    </div>
 
-            <!-- Modal footer -->
-            <div class="modal-footer">
-                <button type="submit" class="btn btn-success" name="tambahproduk">Tambah</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div>
-        </form>
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success" name="tambahproduk">Tambah</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
 
-    </div>
-  </div>
+                            </div>
+                        </div>
+                        </div>
+
+                                    <!-- The Modal print -->
+                                    <div class="modal fade" id="cetak<?=$idp;?>">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+
+                                            <!-- Modal Header -->
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Cetak Pesanan</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+
+                                            <form method="POST">
+                                                <!-- Modal body -->
+                                                <div class="modal-body">
+                                                    <div class="card mb-4">
+                                                        <div class="card-header">
+                                                            <i class="fas fa-table me-1"></i>
+                                                            Data Pesanan
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <table id="datatablesSimple">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>No</th>
+                                                                    <th>Nama Produk</th>
+                                                                    <th>Harga Satuan</th>
+                                                                    <th>Jumlah</th>
+                                                                    <th>Sub Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                    <?php
+$get = mysqli_query($conn, "SELECT * FROM detailpesanan dp, produk p WHERE dp.idproduk = p.idproduk and dp.idpesanan='$idp'");
+$i = 1;
+while ($p = mysqli_fetch_array($get)) {
+    $idpr = $p['idproduk'];
+    $iddp = $p['iddetailpesanan'];
+    $idp = $p['idpesanan'];
+    $qty = $p['qty'];
+    $namaproduk = $p['namaproduk'];
+    $deskripsi = $p['deskripsi'];
+    $harga = $p['harga'];
+    $subtotal = $qty * $harga;
+
+    ?>
+                                        <tr>
+                                            <td><?=$i++;?></td>
+                                            <td><?=$namaproduk;?> - <?=$deskripsi;?></td>
+                                            <td>Rp.<?=number_format($harga);?></td>
+                                            <td><?=number_format($qty);?> pcs</td>
+                                            <td>Rp.<?=number_format($subtotal);?></td>
+                                        </tr>
+
+                                        <?php
+}
+;
+?>
+                                    </tbody>
+                                </table>
+</div>
 </div>
 
+                                                    <input type="hidden" name="iddp" value="<?=$iddp;?>">
+                                                    <input type="hidden" name="idpr" value="<?=$idpr;?>">
+                                                    <input type="hidden" name="idp" value="<?=$idp;?>">
+                                                    </div>
+
+                                                    <!-- Modal footer -->
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-success" name="cetakpesanan">Print</button>
+                                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
 
 </html>
