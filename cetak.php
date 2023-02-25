@@ -36,13 +36,28 @@ if (isset($_GET['idp'])) {
 <div class="card">
     <div class="text-center">
         <div class="card-header">
-            Nama Toko
+            ====== NOTA PEMBELIAN ======
         </div>
         <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <h5 class="card-title">Nama Toko</h5>
+            <p class="card-text">alamat toko ada dimana </p>
         </div>
     </div>
+    <div class="row">
+        <div class="col-2">Nama</div>
+        <div class="col-6">: <?= $np['namapelanggan']; ?></div>
+        <div class="col-4">Tanggal :</div>
+    </div>
+    <div class="row">
+        <div class="col-2">No Telp</div>
+        <div class="col-6">: <?= $np['notelp']; ?></div>
+        <div class="col-4"><?= $np['tanggal']; ?></div>
+    </div>
+    <div class="row">
+        <div class="col-2">Alamat </div>
+        <div class="col-10">: <?= $np['alamat']; ?></div>
+    </div>
+    <hr>
     <table class="table">
         <thead>
         <tr>
@@ -93,10 +108,10 @@ if (isset($_GET['idp'])) {
             </tfoot>
     </table>
 
-    <button class="btn btn-primary" onclick="window.print()" id="btnprint">Go Print</button>
 </div>
 <div class="card-footer text-muted text-center">
-    kasir euy
+    <button class="btn btn-danger mx-3" onclick="history.back()" id="btnprint">Go Back</button>
+    <button class="btn btn-primary mx-3" onclick="window.print()" id="btnprint">Go Print</button>
   </div>
 </div>
 
