@@ -31,9 +31,10 @@ if (isset($_POST['tambahbarang'])) {
     $namaproduk = $_POST['namaproduk'];
     $deskripsi = $_POST['deskripsi'];
     $stock = $_POST['stock'];
-    $harga = $_POST['harga'];
+    $hargabeli = $_POST['hargabeli'];
+    $hargajual = $_POST['hargajual'];
 
-    $insert = mysqli_query($conn, "INSERT INTO produk (namaproduk,deskripsi,harga,stock) values ('$namaproduk','$deskripsi','$harga','$stock')");
+    $insert = mysqli_query($conn, "INSERT INTO produk (namaproduk,deskripsi,beli,harga,stock) values ('$namaproduk','$deskripsi','$hargabeli','$hargajual','$stock')");
 
     if ($insert) {
         header('location:stock.php');

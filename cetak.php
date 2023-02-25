@@ -23,70 +23,79 @@ if (isset($_GET['idp'])) {
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+<style>
+    @media print {
+        #btnprint {
+            display:none;
+        }
+    }
+</style>
     </head>
 <body>
 
-<div class="card text-center">
-  <div class="card-header">
-    Nama Toko
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+<div class="card">
+    <div class="text-center">
+        <div class="card-header">
+            Nama Toko
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Produk</th>
+            <th>Harga Satuan</th>
+            <th>Jumlah</th>
+            <th>Sub Total</th>
+        </tr>
+        </thead>
+        <tbody>
+                <?php
+                $get = mysqli_query($conn, "SELECT * FROM detailpesanan dp, produk p WHERE dp.idproduk = p.idproduk and dp.idpesanan='$idp'");
+                $i = 1;
+                $allsub = 0;
+                while ($p = mysqli_fetch_array($get)) {
+                    $idpr = $p['idproduk'];
+                    $iddp = $p['iddetailpesanan'];
+                    $idp = $p['idpesanan'];
+                    $qty = $p['qty'];
+                    $namaproduk = $p['namaproduk'];
+                    $deskripsi = $p['deskripsi'];
+                    $harga = $p['harga'];
+                    $subtotal = $qty * $harga;
+                    $allsub += $subtotal;
 
-<table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama Produk</th>
-                                            <th>Harga Satuan</th>
-                                            <th>Jumlah</th>
-                                            <th>Sub Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-$get = mysqli_query($conn, "SELECT * FROM detailpesanan dp, produk p WHERE dp.idproduk = p.idproduk and dp.idpesanan='$idp'");
-$i = 1;
-$allsub = 0;
-while ($p = mysqli_fetch_array($get)) {
-    $idpr = $p['idproduk'];
-    $iddp = $p['iddetailpesanan'];
-    $idp = $p['idpesanan'];
-    $qty = $p['qty'];
-    $namaproduk = $p['namaproduk'];
-    $deskripsi = $p['deskripsi'];
-    $harga = $p['harga'];
-    $subtotal = $qty * $harga;
-    $allsub += $subtotal;
+                    ?>
+            <tr>
+                <td><?=$i++;?></td>
+                <td><?=$namaproduk;?> - <?=$deskripsi;?></td>
+                <td>Rp.<?=number_format($harga);?></td>
+                <td><?=number_format($qty);?> pcs</td>
+                <td>Rp.<?=number_format($subtotal);?></td>
+            </tr>
 
+                    <?php
+                    }
+                    ;
+                    ?>
+        </tbody>
 
-    ?>
-                                        <tr>
-                                            <td><?=$i++;?></td>
-                                            <td><?=$namaproduk;?> - <?=$deskripsi;?></td>
-                                            <td>Rp.<?=number_format($harga);?></td>
-                                            <td><?=number_format($qty);?> pcs</td>
-                                            <td>Rp.<?=number_format($subtotal);?></td>
-                                        </tr>
-                                        
-                                        <?php
-}
-;
-?>
-<tfoot>
-    <td>Total</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td>Rp.<?=number_format($allsub); ?></td>
-</tfoot>
-                                    </tbody>
-                                </table>
+            <tfoot>
+                <th>Total</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Rp.<?=number_format($allsub);?></th>
+            </tfoot>
+    </table>
 
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    <button class="btn btn-primary" onclick="window.print()" id="btnprint">Go Print</button>
 </div>
-  <div class="card-footer text-muted">
+<div class="card-footer text-muted text-center">
     kasir euy
   </div>
 </div>

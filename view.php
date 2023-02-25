@@ -295,7 +295,7 @@ while ($p = mysqli_fetch_array($getproduk)) {
                                                             Data Pesanan
                                                         </div>
                                                         <div class="card-body">
-                                                            <table id="datatablesSimple">
+                                                            <table class="table">
                                                             <thead>
                                                                 <tr>
                                                                     <th>No</th>

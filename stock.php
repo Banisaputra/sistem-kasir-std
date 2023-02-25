@@ -95,6 +95,7 @@ $h2 = mysqli_num_rows($h1);
                                             <th>Deskripsi</th>
                                             <th>Stock</th>
                                             <th>Harga</th>
+                                            <th>Harga Jual</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -106,6 +107,7 @@ while ($p = mysqli_fetch_array($get)) {
     $namaproduk = $p['namaproduk'];
     $deskripsi = $p['deskripsi'];
     $stock = $p['stock'];
+    $beli = $p['beli'];
     $harga = $p['harga'];
     $idproduk = $p['idproduk'];
 
@@ -115,6 +117,7 @@ while ($p = mysqli_fetch_array($get)) {
                                             <td><?=$namaproduk;?></td>
                                             <td><?=$deskripsi;?></td>
                                             <td><?=$stock;?> pcs</td>
+                                            <td>Rp.<?=number_format($beli);?></td>
                                             <td>Rp.<?=number_format($harga);?></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idproduk;?>">Edit</button>
@@ -231,8 +234,9 @@ while ($p = mysqli_fetch_array($get)) {
           <div class="modal-body">
               <input type="text" name="namaproduk" class="form-control" placeholder="Nama Produk" required>
               <input type="text" name="deskripsi" class="form-control mt-2" placeholder="Deskripsi" required>
-              <input type="num" name="stock" class="form-control mt-2" placeholder="Stock Awal" required>
-              <input type="num" name="harga" class="form-control mt-2" placeholder="Harga Produk" required>
+              <input type="number" name="stock" class="form-control mt-2" placeholder="Stock Awal" min="1" required>
+              <input type="number" name="hargabeli" class="form-control mt-2" placeholder="Harga Beli" min="1" required>
+              <input type="number" name="hargajual" class="form-control mt-2" placeholder="Harga Jual" min="1" required>
             </div>
 
             <!-- Modal footer -->
