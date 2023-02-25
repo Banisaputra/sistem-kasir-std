@@ -3,3 +3,4 @@
 - CRUD
 - stock synchronization
 - simple login
+- printout
