@@ -155,7 +155,7 @@ while ($p = mysqli_fetch_array($get)) {
 
                            <?php
 }
-;
+;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 ?>
                         </tbody>
                      </table>
